@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wahab Ahmad | Graphic Designer + Web Builder</title>
+  <meta name="description" content="Wahab Ahmad — 19-year-old Graphic Designer and Web Builder from Faisalabad, Punjab, Pakistan. I turn ideas into professional designs and fully custom websites in 2 to 4 weeks." />
+  <meta name="author" content="Wahab Ahmad" />
+  <meta name="theme-color" content="#050510" />
+  <link rel="preload" as="style" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23050510' rx='6'/%3E%3Cpath d='M8 8l8 8M16 8l8 8' stroke='%23a855f7' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="preloader-content">
+      <div class="preloader-name">Wahab Ahmad</div>
+      <div class="preloader-tag">Graphic Designer + Web Builder</div>
+      <div class="loader"></div>
+    </div>
+  </div>
+
+  <!-- Custom cursor -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo" id="navLogo">Wahab Ahmad</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">🌓</button>
+        <a href="#contact" class="btn primary">Hire Me</a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="nav-overlay" id="navOverlay">
+    <button class="nav-close" id="navClose" aria-label="Close menu">✕</button>
+    <div class="nav-overlay-content">
+      <ul class="nav-links" id="overlayLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="admin.html" style="color:var(--accent-end); margin-top:1rem; display:block;">Admin Panel</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero reveal" id="home">
+    <div class="hero-bg">
+      <div class="hero-grid"></div>
+      <div class="hero-blob"></div>
+      <div class="hero-blob"></div>
+      <div class="hero-blob"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badges">
+        <span class="badge">Available for freelance</span>
+        <span class="badge">Delivery in 2–4 weeks</span>
+      </div>
+      <h1 class="typing-text"><span class="typing-target"></span><span class="cursor-typing"></span></h1>
+      <p class="hero-tagline" id="heroTagline"></p>
+      <div class="hero-actions">
+        <a href="#portfolio" class="btn primary">View My Work</a>
+        <a href="#contact" class="btn outline">Hire Me</a>
+      </div>
+      <div class="hero-social" id="heroSocial"></div>
+    </div>
+    <div class="hero-visual">
+      <div class="profile-glow"></div>
+      <div class="profile-placeholder" id="heroProfile">
+        <div class="placeholder-fallback">Your photo goes here<br><span style="font-size:0.8rem; opacity:0.7;">Upload from admin panel</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats reveal" id="stats">
+    <div class="stats-grid" id="statsGrid"></div>
+  </section>
+
+  <!-- About -->
+  <section class="section reveal" id="about">
+    <div class="about-grid">
+      <div class="about-image">
+        <div class="frame" id="aboutImageFrame">
+          <div class="placeholder">Your photo goes here<br><span style="font-size:0.8rem; opacity:0.7;">Upload from admin panel</span></div>
+        </div>
+        <div class="about-badge">
+          <div class="dot"></div>
+          <span>19 years old • Faisalabad, Punjab, Pakistan</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <div class="section-title delay-1">
+          <span class="kicker">About Me</span>
+          <h2>I turn ideas into<br>designs and websites.</h2>
+          <p>Hi, I'm Wahab Ahmad — a Graphic Designer and Web Builder based in Faisalabad, Pakistan.</p>
+        </div>
+        <div class="about-content delay-2" id="aboutContent"></div>
+        <div class="about-actions delay-3">
+          <a href="#" id="resumeDownload" class="btn outline">Download Resume</a>
+          <a href="#contact" class="btn primary">Hire Me</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section reveal" id="services">
+    <div class="section-title delay-1">
+      <span class="kicker">What I Offer</span>
+      <h2>My Services</h2>
+      <p>From a single idea to a fully customized website — I handle design and development in one place.</p>
+    </div>
+    <div class="services-grid" id="servicesGrid"></div>
+  </section>
+
+  <!-- Skills -->
+  <section class="section reveal" id="skills">
+    <div class="section-title delay-1">
+      <span class="kicker">Tools of the Trade</span>
+      <h2>Skills &amp; Tools</h2>
+      <p>Adobe Creative Suite, Figma, AI tools, and modern web technologies — all editable from the admin panel.</p>
+    </div>
+    <div class="skills-grid" id="skillsGrid"></div>
+  </section>
+
+  <!-- Portfolio -->
+  <section class="section reveal" id="portfolio">
+    <div class="section-title delay-1">
+      <span class="kicker">Selected Work</span>
+      <h2>My Portfolio</h2>
+      <p>Sample projects shown — replace them with your real work from the admin panel.</p>
+    </div>
+    <div class="portfolio-filters" id="portfolioFilters">
+      <button class="filter-btn active" data-filter="All">All</button>
+      <button class="filter-btn" data-filter="Branding &amp; Logo">Branding &amp; Logo</button>
+      <button class="filter-btn" data-filter="Social Media Design">Social Media Design</button>
+      <button class="filter-btn" data-filter="Print &amp; Textile">Print &amp; Textile</button>
+      <button class="filter-btn" data-filter="UI/UX">UI/UX</button>
+      <button class="filter-btn" data-filter="Websites">Websites</button>
+    </div>
+    <div class="portfolio-grid" id="portfolioGrid"></div>
+  </section>
+
+  <!-- Process -->
+  <section class="section reveal" id="process">
+    <div class="section-title delay-1">
+      <span class="kicker">How I Work</span>
+      <h2>My Process</h2>
+      <p>From your first message to final launch — every project takes 2 to 4 weeks.</p>
+    </div>
+    <div class="process-line" id="processLine"></div>
+    <div class="process-grid" id="processGrid"></div>
+    <div class="section-title delay-2" style="margin-top:3rem;">
+      <span class="kicker">Timeline</span>
+      <h2>Total Delivery Time</h2>
+      <p class="delay-3" style="font-size:clamp(2rem,5vw,2.5rem); font-weight:800; background:var(--accent); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;">2 – 4 Weeks</p>
+    </div>
+  </section>
+
+  <!-- Experience / Education / Certificates -->
+  <section class="section reveal" id="experience">
+    <div class="section-title delay-1">
+      <span class="kicker">Background</span>
+      <h2>Experience, Education &amp; Certificates</h2>
+      <p>1.5 years in Textile and Screen Printing • Certificate in Graphic Designing • Matric &amp; Intermediate</p>
+    </div>
+    <div class="timeline" id="timeline"></div>
+  </section>
+
+  <!-- Why Choose Me -->
+  <section class="section reveal" id="why">
+    <div class="section-title delay-1">
+      <span class="kicker">Why Work With Me</span>
+      <h2>Why Choose Me?</h2>
+      <p>No templates, no empty promises — just custom design and development made exactly to your demands.</p>
+    </div>
+    <div class="why-grid" id="whyGrid"></div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section reveal" id="testimonials">
+    <div class="section-title delay-1">
+      <span class="kicker">Client Reviews</span>
+      <h2>Testimonials</h2>
+      <p>Sample testimonials shown — manage them from the admin panel.</p>
+    </div>
+    <div class="testimonials-grid" id="testimonialsGrid"></div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section reveal" id="contact">
+    <div class="contact-grid">
+      <div class="contact-form delay-1">
+        <h3>Send me a message</h3>
+        <form id="contactForm">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" name="name" placeholder="John Doe" required />
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" name="email" placeholder="you@example.com" required />
+          </div>
+          <div class="form-group">
+            <label>Service Needed</label>
+            <select name="service" required>
+              <option value="">Select a service</option>
+              <option>Graphic Design</option>
+              <option>UI/UX Design</option>
+              <option>Web Building</option>
+              <option>Textile &amp; Screen Printing</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea name="message" placeholder="Tell me about your project…" required></textarea>
+          </div>
+          <button type="submit" class="btn primary" id="submitBtn">Send Message</button>
+          <div class="form-status" id="formStatus"></div>
+        </form>
+      </div>
+      <div class="contact-info delay-2">
+        <h3>Get in touch</h3>
+        <div class="info-item">
+          <div class="icon-box">📍</div>
+          <div>
+            <h4>Location</h4>
+            <p id="contactLocation">Faisalabad, Punjab, Pakistan</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="icon-box">✉️</div>
+          <div>
+            <h4>Email</h4>
+            <p id="contactEmail">hello@wahabahmad.com</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="icon-box">📱</div>
+          <div>
+            <h4>WhatsApp</h4>
+            <p id="contactWhatsapp">+92 300 0000000</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="reveal">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo">Wahab Ahmad</span>
+        <p>Graphic Designer + Web Builder from Faisalabad, Punjab, Pakistan. Turning ideas into professional designs and fully custom websites in 2 to 4 weeks.</p>
+        <div class="socials" id="footerSocials"></div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Graphic Design</a></li>
+          <li><a href="#services">UI/UX Design</a></li>
+          <li><a href="#services">Web Building</a></li>
+          <li><a href="#services">Textile &amp; Screen Printing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="#" id="footerEmail">hello@wahabahmad.com</a></li>
+          <li><a href="#" id="footerWhatsapp">+92 300 0000000</a></li>
+          <li><a href="admin.html">Admin Panel</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> Wahab Ahmad. All rights reserved.</p>
+      <p style="font-size:0.8rem; opacity:0.6;">Designed and built by Wahab Ahmad.</p>
+    </div>
+  </footer>
+
+  <!-- WhatsApp floating button -->
+  <a href="#" class="whatsapp-float" id="whatsappFloat" aria-label="WhatsApp">
+    <span class="label">WhatsApp me</span>
+    <span class="btn">💬 WhatsApp</span>
+  </a>
+
+  <!-- Lightbox -->
+  <div id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">✕</button>
+    <div class="lightbox-content">
+      <img id="lightboxImage" src="" alt="" class="lightbox-image" />
+      <div class="lightbox-details">
+        <span class="category" id="lightboxCategory"></span>
+        <h3 id="lightboxTitle"></h3>
+        <p id="lightboxDescription"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
