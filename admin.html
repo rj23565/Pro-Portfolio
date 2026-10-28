@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel — Wahab Ahmad Portfolio</title>
+  <meta name="description" content="Admin panel to manage Wahab Ahmad's portfolio website" />
+  <link rel="preload" as="style" href="assets/css/admin.css" />
+  <link rel="stylesheet" href="assets/css/admin.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23050510' rx='6'/%3E%3Cpath d='M8 8l8 8M16 8l8 8' stroke='%23a855f7' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <div class="admin-wrap">
+
+    <!-- ==================== LOGIN ==================== -->
+    <div id="adminLogin" class="admin-login">
+      <div class="login-card">
+        <div class="login-brand">
+          <div class="login-logo">Wahab Ahmad</div>
+          <div class="login-title">Portfolio Admin</div>
+        </div>
+        <form id="loginForm">
+          <div class="form-group">
+            <label>Admin Password</label>
+            <input type="password" name="password" placeholder="Enter admin password" required autocomplete="current-password" />
+          </div>
+          <button type="submit" class="btn-primary" id="loginBtn">Unlock Panel</button>
+          <div id="loginError" class="error"></div>
+        </form>
+        <div class="login-hint">Default password: <code>admin123</code> (change it in Settings)</div>
+      </div>
+    </div>
+
+    <!-- ==================== MAIN PANEL ==================== -->
+    <div id="adminMain" class="admin-main hidden">
+      <!-- Sidebar -->
+      <aside class="admin-sidebar">
+        <div class="sidebar-brand">
+          <div class="sidebar-logo">W<span style="color:#a855f7;">ahab</span> Ahmad</div>
+          <div class="sidebar-sub">Portfolio Admin</div>
+        </div>
+        <nav class="sidebar-nav">
+          <button class="nav-item active" data-section="dashboard">
+            <span class="nav-icon">📊</span>
+            <span class="nav-label">Dashboard</span>
+            <span class="nav-badge" id="badgeDashboard">0</span>
+          </button>
+          <button class="nav-item" data-section="projects">
+            <span class="nav-icon">💼</span>
+            <span class="nav-label">Projects</span>
+            <span class="nav-badge" id="badgeProjects">0</span>
+          </button>
+          <button class="nav-item" data-section="content">
+            <span class="nav-icon">✏️</span>
+            <span class="nav-label">Content Editor</span>
+          </button>
+          <button class="nav-item" data-section="services">
+            <span class="nav-icon">🛠️</span>
+            <span class="nav-label">Services</span>
+          </button>
+          <button class="nav-item" data-section="skills">
+            <span class="nav-icon">📈</span>
+            <span class="nav-label">Skills</span>
+          </button>
+          <button class="nav-item" data-section="testimonials">
+            <span class="nav-icon">💬</span>
+            <span class="nav-label">Testimonials</span>
+            <span class="nav-badge" id="badgeTestimonials">0</span>
+          </button>
+          <button class="nav-item" data-section="messages">
+            <span class="nav-icon">📥</span>
+            <span class="nav-label">Messages</span>
+            <span class="nav-badge" id="badgeMessages">0</span>
+          </button>
+          <button class="nav-item" data-section="theme">
+            <span class="nav-icon">🎨</span>
+            <span class="nav-label">Theme</span>
+          </button>
+          <button class="nav-item" data-section="sections">
+            <span class="nav-icon">🧩</span>
+            <span class="nav-label">Section Control</span>
+          </button>
+          <button class="nav-item" data-section="settings">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-label">Settings</span>
+          </button>
+        </nav>
+        <div class="sidebar-footer">
+          <button class="nav-item logout" id="adminLogout">
+            <span class="nav-icon">🚪</span>
+            <span class="nav-label">Logout</span>
+          </button>
+          <div class="sidebar-version">v1.0 • localStorage</div>
+        </div>
+      </aside>
+
+      <!-- Main content -->
+      <div class="admin-content">
+        <header class="admin-header">
+          <h1 id="pageTitle">Dashboard</h1>
+          <p id="pageSubtitle">Manage your portfolio website content</p>
+        </header>
+
+        <!-- Dashboard -->
+        <section id="viewDashboard" class="admin-view active">
+          <div class="overview-grid">
+            <div class="stat-card">
+              <div class="stat-value" id="dashProjects">0</div>
+              <div class="stat-label">Portfolio Projects</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="dashMessages">0</div>
+              <div class="stat-label">Messages Inbox</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="dashServices">0</div>
+              <div class="stat-label">Services</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="dashTestimonials">0</div>
+              <div class="stat-label">Testimonials</div>
+            </div>
+          </div>
+          <div class="quick-grid">
+            <div class="quick-card">
+              <h3>Quick Actions</h3>
+              <p>Get started managing your portfolio.</p>
+              <div class="quick-actions">
+                <button class="quick-btn" onclick="app.openSection('projects')">Add a Project</button>
+                <button class="quick-btn" onclick="app.openSection('content')">Edit Hero Text</button>
+                <button class="quick-btn" onclick="app.openSection('messages')">Check Messages</button>
+                <button class="quick-btn" onclick="app.openSection('settings')">Change Password</button>
+              </div>
+            </div>
+            <div class="quick-card live-preview-card">
+              <h3>Live Preview</h3>
+              <p>Open your website in a new tab.</p>
+              <a href="index.html" target="_blank" class="quick-btn primary">Open Website</a>
+              <p class="note">Changes save instantly to localStorage and appear on the live site.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Projects -->
+        <section id="viewProjects" class="admin-view hidden">
+          <div class="view-header">
+            <h2>Portfolio Projects</h2>
+            <button class="btn-primary" onclick="app.openProjectModal()">+ Add Project</button>
+          </div>
+          <div class="table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th style="width:40px">#</th>
+                  <th>Image</th>
+                  <th>Title</th>
+                  <th>Category</th>
+                  <th>Order</th>
+                  <th style="width:110px">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="projectsTableBody"></tbody>
+            </table>
+            <p class="note" id="projectsEmpty" class="hidden">No projects yet. Add your first project.</p>
+          </div>
+        </section>
+
+        <!-- Content Editor -->
+        <section id="viewContent" class="admin-view hidden">
+          <h2>Content Editor</h2>
+          <p class="subtitle">Edit text that appears on the live website. Changes update instantly.</p>
+          <form id="contentForm" class="content-form">
+            <div class="form-group">
+              <label>Name (Logo)</label>
+              <input type="text" name="siteName" required />
+            </div>
+            <div class="form-group">
+              <label>Tagline / Selling Point</label>
+              <textarea name="tagline" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+              <label>Roles (comma-separated, for typing effect)</label>
+              <input type="text" name="roles" placeholder="Graphic Designer, Web Builder, UI/UX Designer" />
+            </div>
+            <div class="form-group">
+              <label>About Me (multi-line supported)</label>
+              <textarea name="about" rows="6" required></textarea>
+            </div>
+            <div class="stats-grid">
+              <div class="form-group">
+                <label>Stat 1 Label</label>
+                <input type="text" name="stat1Label" />
+              </div>
+              <div class="form-group">
+                <label>Stat 1 Value</label>
+                <input type="text" name="stat1Value" />
+              </div>
+              <div class="form-group">
+                <label>Stat 1 Suffix</label>
+                <input type="text" name="stat1Suffix" placeholder="e.g. Weeks, Years" />
+              </div>
+              <div class="form-group">
+                <label>Stat 2 Label</label>
+                <input type="text" name="stat2Label" />
+              </div>
+              <div class="form-group">
+                <label>Stat 2 Value</label>
+                <input type="text" name="stat2Value" />
+              </div>
+              <div class="form-group">
+                <label>Stat 2 Suffix</label>
+                <input type="text" name="stat2Suffix" placeholder="e.g. Weeks" />
+              </div>
+              <div class="form-group">
+                <label>Stat 3 Label</label>
+                <input type="text" name="stat3Label" />
+              </div>
+              <div class="form-group">
+                <label>Stat 3 Value</label>
+                <input type="text" name="stat3Value" />
+              </div>
+              <div class="form-group">
+                <label>Stat 3 Suffix</label>
+                <input type="text" name="stat3Suffix" placeholder="e.g. %" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" name="email" />
+            </div>
+            <div class="form-group">
+              <label>WhatsApp / Phone</label>
+              <input type="text" name="whatsapp" />
+            </div>
+            <div class="form-group">
+              <label>Location</label>
+              <input type="text" name="location" />
+            </div>
+            <div class="form-group">
+              <label>Resume Download URL</label>
+              <input type="url" name="resumeUrl" placeholder="https://..." />
+            </div>
+            <div class="form-group full">
+              <label>SEO Title</label>
+              <input type="text" name="seoTitle" />
+            </div>
+            <div class="form-group full">
+              <label>SEO Description</label>
+              <input type="text" name="seoDescription" />
+            </div>
+            <button type="submit" class="btn-primary">Save Content Changes</button>
+          </form>
+          <div id="contentSaved" class="saved-msg hidden">✓ Saved — changes are live on the website.</div>
+        </section>
+
+        <!-- Services -->
+        <section id="viewServices" class="admin-view hidden">
+          <div class="view-header">
+            <h2>Services Manager</h2>
+            <button class="btn-primary" onclick="app.openServiceModal()">+ Add Service</button>
+          </div>
+          <div class="table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Icon</th>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Included Items</th>
+                  <th style="width:120px">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="servicesTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="viewSkills" class="admin-view hidden">
+          <h2>Skills Manager</h2>
+          <p class="subtitle">Edit skill names, percentages, and categories. Percentages show as animated bars on the live site.</p>
+          <div class="table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Skill Name</th>
+                  <th>Category</th>
+                  <th>Percentage</th>
+                  <th style="width:140px">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="skillsTableBody"></tbody>
+            </table>
+          </div>
+          <div class="form-actions" style="margin-top:1.5rem;">
+            <button class="btn-outline" onclick="app.addSkillRow()">+ Add Skill Row</button>
+            <button class="btn-primary" onclick="app.saveSkills()">Save All Skills</button>
+          </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section id="viewTestimonials" class="admin-view hidden">
+          <div class="view-header">
+            <h2>Testimonials Manager</h2>
+            <button class="btn-primary" onclick="app.openTestimonialModal()">+ Add Testimonial</button>
+          </div>
+          <div class="table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Photo</th>
+                  <th>Name</th>
+                  <th>Role</th>
+                  <th>Review</th>
+                  <th>Rating</th>
+                  <th style="width:110px">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="testimonialsTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Messages -->
+        <section id="viewMessages" class="admin-view hidden">
+          <div class="view-header">
+            <h2>Messages Inbox</h2>
+            <button class="btn-outline" onclick="app.clearMessages()">Clear All Messages</button>
+          </div>
+          <div class="table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>From</th>
+                  <th>Email</th>
+                  <th>Service</th>
+                  <th>Message</th>
+                  <th>Date</th>
+                  <th style="width:100px">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="messagesTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Theme -->
+        <section id="viewTheme" class="admin-view hidden">
+          <h2>Theme Customizer</h2>
+          <p class="subtitle">Change colors, fonts, logo, and profile photo. Live preview on the website.</p>
+          <form id="themeForm" class="theme-form">
+            <div class="form-group">
+              <label>Accent Start Color</label>
+              <input type="color" name="accentStart" />
+            </div>
+            <div class="form-group">
+              <label>Accent End Color</label>
+              <input type="color" name="accentEnd" />
+            </div>
+            <div class="form-group">
+              <label>Primary Font</label>
+              <select name="primaryFont">
+                <option value="system-ui">System Default (Clean)</option>
+                <option value="'Inter', sans-serif">Inter</option>
+                <option value="'Poppins', sans-serif">Poppins</option>
+                <option value="'Playfair Display', serif">Playfair Display</option>
+                <option value="'Montserrat', sans-serif">Montserrat</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Default Dark Mode</label>
+              <select name="darkModeDefault">
+                <option value="true">Yes (Dark)</option>
+                <option value="false">No (Light)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Logo Image URL</label>
+              <input type="url" name="logo" placeholder="https://..." />
+              <p class="note">Appears in the navbar and footer.</p>
+            </div>
+            <div class="form-group">
+              <label>Profile Photo URL</label>
+              <input type="url" name="profilePhoto" placeholder="https://..." />
+              <p class="note">Appears in the hero and about sections.</p>
+            </div>
+            <div class="social-grid">
+              <div class="form-group">
+                <label>Facebook URL</label>
+                <input type="url" name="socialFacebook" />
+              </div>
+              <div class="form-group">
+                <label>Instagram URL</label>
+                <input type="url" name="socialInstagram" />
+              </div>
+              <div class="form-group">
+                <label>Twitter / X URL</label>
+                <input type="url" name="socialTwitter" />
+              </div>
+              <div class="form-group">
+                <label>LinkedIn URL</label>
+                <input type="url" name="socialLinkedin" />
+              </div>
+              <div class="form-group">
+                <label>Behance URL</label>
+                <input type="url" name="socialBehance" />
+              </div>
+              <div class="form-group">
+                <label>WhatsApp URL</label>
+                <input type="url" name="socialWhatsapp" />
+              </div>
+            </div>
+            <button type="submit" class="btn-primary">Save Theme Changes</button>
+          </form>
+          <div id="themeSaved" class="saved-msg hidden">✓ Theme saved — live on the website.</div>
+        </section>
+
+        <!-- Section Control -->
+        <section id="viewSections" class="admin-view hidden">
+          <h2>Section Control</h2>
+          <p class="subtitle">Turn any website section ON or OFF.</p>
+          <div class="section-list" id="sectionList"></div>
+        </section>
+
+        <!-- Settings -->
+        <section id="viewSettings" class="admin-view hidden">
+          <h2>Settings &amp; Backup</h2>
+          <p class="subtitle">Change your admin password, SEO info, and backup/restore your data.</p>
+          <form id="settingsForm" class="settings-form">
+            <div class="form-group">
+              <label>Current Admin Password</label>
+              <input type="password" name="currentPassword" required />
+            </div>
+            <div class="form-group">
+              <label>New Admin Password</label>
+              <input type="password" name="newPassword" required minlength="4" />
+            </div>
+            <div class="form-group">
+              <label>Confirm New Password</label>
+              <input type="password" name="confirmPassword" required />
+            </div>
+            <button type="submit" class="btn-primary">Change Password</button>
+          </form>
+          <div id="settingsSaved" class="saved-msg hidden">✓ Password changed.</div>
+
+          <div class="settings-section" style="margin-top:2.5rem;">
+            <h3>Backup &amp; Reset</h3>
+            <div class="backup-actions">
+              <button class="btn-outline" onclick="app.exportBackup()">Export JSON Backup</button>
+              <button class="btn-outline" onclick="document.getElementById('importFile').click()">Import Backup</button>
+              <input type="file" id="importFile" accept=".json" hidden />
+              <button class="btn-danger" onclick="app.resetDefaults()">Reset to Defaults</button>
+            </div>
+            <p class="note">Export downloads all your website data as a JSON file. Import restores from a file. Reset wipes everything back to the defaults.</p>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Project Modal -->
+  <div id="projectModal" class="modal hidden">
+    <div class="modal-overlay" onclick="app.closeProjectModal()"></div>
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="projectModalTitle">Add Project</h3>
+        <button class="modal-close" onclick="app.closeProjectModal()">✕</button>
+      </div>
+      <form id="projectForm">
+        <input type="hidden" name="id" />
+        <div class="form-group">
+          <label>Project Title</label>
+          <input type="text" name="title" required />
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select name="category" required>
+            <option value="Branding &amp; Logo">Branding &amp; Logo</option>
+            <option value="Social Media Design">Social Media Design</option>
+            <option value="Print &amp; Textile">Print &amp; Textile</option>
+            <option value="UI/UX">UI/UX</option>
+            <option value="Websites">Websites</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea name="description" rows="4" required></textarea>
+        </div>
+        <div class="form-group">
+          <label>Image URL</label>
+          <input type="url" name="image" placeholder="https://..." required />
+          <p class="note">Upload your image to any image host and paste the URL here.</p>
+        </div>
+        <div class="form-group">
+          <label>Display Order</label>
+          <input type="number" name="order" value="0" min="0" />
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn-outline" onclick="app.closeProjectModal()">Cancel</button>
+          <button type="submit" class="btn-primary">Save Project</button>
+        </div>
+        <div id="projectSaved" class="saved-msg hidden">✓ Saved.</div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Service Modal -->
+  <div id="serviceModal" class="modal hidden">
+    <div class="modal-overlay" onclick="app.closeServiceModal()"></div>
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="serviceModalTitle">Add Service</h3>
+        <button class="modal-close" onclick="app.closeServiceModal()">✕</button>
+      </div>
+      <form id="serviceForm">
+        <input type="hidden" name="id" />
+        <div class="form-group">
+          <label>Service Title</label>
+          <input type="text" name="title" required />
+        </div>
+        <div class="form-group">
+          <label>Icon (emoji)</label>
+          <input type="text" name="icon" value="🎨" maxlength="2" />
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea name="description" rows="4" required></textarea>
+        </div>
+        <div class="form-group">
+          <label>Included Items (comma-separated)</label>
+          <input type="text" name="includes" placeholder="Logo Design, Brand Identity, ..." />
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn-outline" onclick="app.closeServiceModal()">Cancel</button>
+          <button type="submit" class="btn-primary">Save Service</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Testimonial Modal -->
+  <div id="testimonialModal" class="modal hidden">
+    <div class="modal-overlay" onclick="app.closeTestimonialModal()"></div>
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="testimonialModalTitle">Add Testimonial</h3>
+        <button class="modal-close" onclick="app.closeTestimonialModal()">✕</button>
+      </div>
+      <form id="testimonialForm">
+        <input type="hidden" name="id" />
+        <div class="form-group">
+          <label>Client Name</label>
+          <input type="text" name="name" required />
+        </div>
+        <div class="form-group">
+          <label>Role / Title</label>
+          <input type="text" name="role" required />
+        </div>
+        <div class="form-group">
+          <label>Review Text</label>
+          <textarea name="text" rows="4" required></textarea>
+        </div>
+        <div class="form-group">
+          <label>Photo URL</label>
+          <input type="url" name="photo" placeholder="Optional" />
+        </div>
+        <div class="form-group">
+          <label>Rating (1-5)</label>
+          <select name="rating">
+            <option value="5">5 stars</option>
+            <option value="4">4 stars</option>
+            <option value="3">3 stars</option>
+            <option value="2">2 stars</option>
+            <option value="1">1 star</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Sample testimonial?</label>
+          <select name="sample">
+            <option value="true">Yes (marked as sample)</option>
+            <option value="false">No (real client)</option>
+          </select>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn-outline" onclick="app.closeTestimonialModal()">Cancel</button>
+          <button type="submit" class="btn-primary">Save Testimonial</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>
