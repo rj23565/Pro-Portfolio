@@ -1,0 +1,3 @@
+# This file ensures the data directory exists in Git.
+# Actual store.json is gitignored — it is ephemeral and not durable on Vercel.
+# Production must use DATABASE_URL (Postgres) for durable storage.
