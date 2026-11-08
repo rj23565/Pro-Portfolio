@@ -6,7 +6,7 @@ export default function Footer({ accent, email, whatsapp, mobile, location, seoT
         <div className="grid md:grid-cols-3 gap-10">
           <div>
             <div className="flex items-center gap-3">
-              <span className="h-9 w-9 rounded-xl grid place-items-center text-white font-display font-bold" style={{ background: accent }}>W</span>
+              <span className="h-9 w-9 rounded-xl grid place-items-center bg-ink font-display font-bold" style={{ color: accent }} aria-hidden="true">W</span>
               <span className="font-display font-bold text-lg">Wahab Ahmad</span>
             </div>
             <p className="mt-3 text-sm leading-6 text-ink/70 max-w-sm">

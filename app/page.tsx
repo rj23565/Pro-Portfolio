@@ -5,6 +5,7 @@ import EmptyState from "@/components/EmptyState";
 import { Badge } from "@/components/Badge";
 import { getStore } from "@/lib/db";
 import { safeUrl } from "@/lib/sanitize";
+import { accentSurface } from "@/lib/contrast";
 
 export const dynamic = "force-dynamic";
 
@@ -12,6 +13,7 @@ export default async function Home() {
   const store = await getStore();
   const p = store.profile;
   const accent = p.accentColor || "#C9A96A";
+  const onAccent = accentSurface(accent);
   const published = store.projects.filter(x => x.status === "published").sort((a,b)=> a.order - b.order);
   const services = [...store.services].sort((a,b)=> a.order - b.order);
   const skills = [...store.skills].sort((a,b)=> a.order - b.order);
@@ -50,7 +52,7 @@ export default async function Home() {
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-4">
-                <Link href="#work" className="inline-flex items-center justify-center rounded-full px-8 py-3.5 font-semibold text-white shadow-royal transition hover:translate-y-[-1px]" style={{ background: accent }}>
+                <Link href="#work" className="inline-flex items-center justify-center rounded-full px-8 py-3.5 font-semibold shadow-royal transition hover:translate-y-[-1px]" style={onAccent}>
                   View selected work
                 </Link>
                 <Link href="#contact" className="inline-flex items-center justify-center rounded-full bg-white border border-ink/15 px-8 py-3.5 font-semibold text-ink hover:bg-ink hover:text-white transition">
@@ -91,10 +93,11 @@ export default async function Home() {
                       <img src={p.profilePhoto} alt={`${p.name} portrait`} className="h-full w-full object-cover" style={{ objectPosition: "center top" }} />
                     ) : (
                       <div className="p-8 text-center">
-                        <div className="mx-auto h-20 w-20 rounded-full bg-white border border-ink/10 grid place-items-center text-ink/40">◐</div>
-                        <div className="mt-4 font-display text-lg font-semibold">Portrait coming soon</div>
-                        <p className="mt-2 text-sm leading-6 text-ink/60">Your supplied profile photo will appear here exactly as provided — face and hair unaltered. Background and frame are styled to match the royal palette.</p>
-                        <div className="mt-4 inline-flex rounded-full bg-ink text-white px-4 py-1.5 font-mono text-[11px] tracking-widest">RESERVED FOR SUPPLIED PHOTO</div>
+                        <div className="mx-auto h-20 w-20 rounded-full bg-white border border-ink/10 grid place-items-center font-display text-3xl text-ink/30">WA</div>
+                        <div className="mt-4 font-display text-2xl font-semibold">{p.name}</div>
+                        <div className="mt-1 font-mono text-[11px] tracking-widest text-ink/55">{p.role.toUpperCase()}</div>
+                        <div className="mt-4 h-px w-16 mx-auto" style={{ background: accent }} />
+                        <p className="mt-4 text-sm leading-6 text-ink/60">Designing considered identities and digital experiences from Faisalabad, Pakistan.</p>
                       </div>
                     )}
                     {/* decorative corner */}
@@ -103,7 +106,7 @@ export default async function Home() {
                         <div className="font-display font-semibold leading-none">{p.name}</div>
                         <div className="font-mono text-[11px] tracking-widest text-ink/60">{p.role}</div>
                       </div>
-                      <div className="h-8 w-8 rounded-full grid place-items-center text-white text-sm" style={{ background: accent }}>✦</div>
+                      <div className="h-8 w-8 rounded-full grid place-items-center text-sm" style={onAccent}>✦</div>
                     </div>
                   </div>
                 </div>
@@ -116,33 +119,71 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Featured work reserved position */}
-      <section className="mx-auto max-w-7xl px-6 lg:px-8 mt-6">
-        <div className="rounded-[28px] bg-ink text-white p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 overflow-hidden relative">
-          <div className="absolute inset-0 opacity-20" style={{ background: `linear-gradient(135deg, ${accent} 0%, #6D5BFF 50%, #EC4899 100%)` }} />
-          <div className="relative">
-            <div className="font-mono text-[11px] tracking-[0.2em] text-white/70">FEATURED WORK • RESERVED</div>
-            <h3 className="mt-2 font-display text-2xl font-semibold">Website Services — signature showcase</h3>
-            <p className="mt-2 max-w-xl text-sm leading-6 text-white/75">This spotlight is reserved for the website-services graphic you will provide later. It will appear here without alteration, framed in the royal treatment.</p>
-          </div>
-          <div className="relative w-full md:w-[360px] shrink-0">
-            {featured ? (
-              <Link href={`/project/${featured.id}`} className="block rounded-2xl bg-white text-ink overflow-hidden hover:shadow-royal transition">
-                {featured.coverImage && <img src={featured.coverImage} alt={featured.title} className="h-40 w-full object-cover" />}
-                <div className="p-4">
-                  <div className="font-mono text-[11px] tracking-widest text-ink/60">{featured.category}</div>
-                  <div className="font-display font-semibold">{featured.title}</div>
+      {/* Featured work.
+          Renders the real featured project once one is chosen in the admin.
+          Until then a designed, self-contained showcase band holds the slot —
+          no fabricated imagery, no admin instructions in public view. */}
+      <section className="mx-auto max-w-7xl px-6 lg:px-8 mt-8">
+        {featured ? (
+          <Link
+            href={`/project/${featured.id}`}
+            className="group block rounded-[28px] bg-ink text-white overflow-hidden relative shadow-royal"
+          >
+            <div className="absolute inset-0 opacity-25" style={{ background: `linear-gradient(135deg, ${accent} 0%, #6D5BFF 50%, #EC4899 100%)` }} />
+            <div className="relative grid md:grid-cols-12">
+              <div className="md:col-span-7 p-7 md:p-9">
+                <div className="font-mono text-[11px] tracking-[0.2em] text-white/70">FEATURED WORK</div>
+                <h3 className="mt-3 font-display text-2xl md:text-3xl font-semibold leading-tight">{featured.title}</h3>
+                {featured.category.toLowerCase() !== "textile" && featured.description ? (
+                  <p className="mt-3 max-w-xl text-sm leading-6 text-white/80 line-clamp-2">{featured.description}</p>
+                ) : null}
+                <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-ink">
+                  View project <span aria-hidden="true">↗</span>
                 </div>
-              </Link>
-            ) : (
-              <div className="rounded-2xl bg-white/10 backdrop-blur border border-white/15 p-6 text-center">
-                <div className="mx-auto h-10 w-10 rounded-full bg-white/15 grid place-items-center">◇</div>
-                <div className="mt-3 font-medium text-white">Awaiting your graphic</div>
-                <div className="mt-1 text-xs leading-5 text-white/70">Upload via Admin → Profile → Featured Work. No placeholder image will be generated.</div>
               </div>
-            )}
+              <div className="md:col-span-5 relative min-h-[180px] md:min-h-0">
+                {featured.coverImage ? (
+                  <img src={featured.coverImage} alt={featured.title} className="absolute inset-0 h-full w-full object-cover" />
+                ) : (
+                  <div className="absolute inset-0 grid place-items-center bg-white/5">
+                    <span className="font-mono text-[11px] tracking-widest text-white/60">{featured.category.toUpperCase()}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          </Link>
+        ) : (
+          <div className="rounded-[28px] bg-ink text-white overflow-hidden relative">
+            <div className="absolute inset-0 opacity-20" style={{ background: `linear-gradient(135deg, ${accent} 0%, #6D5BFF 55%, #EC4899 100%)` }} />
+            <div className="relative grid md:grid-cols-12 items-center">
+              <div className="md:col-span-7 p-7 md:p-9">
+                <div className="font-mono text-[11px] tracking-[0.2em] text-white/70">SIGNATURE PROJECT</div>
+                <h3 className="mt-3 font-display text-2xl md:text-3xl font-semibold leading-tight">
+                  A spotlight for the next piece of work
+                </h3>
+                <p className="mt-3 max-w-md text-sm leading-6 text-white/80">
+                  This space is held for a signature website project — the kind of build that ties brand, typography, and interaction together.
+                </p>
+              </div>
+              <div className="md:col-span-5 p-7 md:p-9">
+                <div className="rounded-2xl border border-white/20 bg-white/[0.07] backdrop-blur p-6">
+                  <div className="font-mono text-[11px] tracking-widest text-white/60">AVAILABLE TO COMMISSION</div>
+                  <p className="mt-3 text-sm leading-6 text-white/85">
+                    Building something that deserves this slot? Let&apos;s talk through it.
+                  </p>
+                  <a
+                    href={`https://wa.me/${p.whatsapp.replace(/[^0-9]/g, "")}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-ink hover:bg-ivory-soft transition"
+                  >
+                    Start a conversation <span aria-hidden="true">↗</span>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        )}
       </section>
 
       {/* Selected Work */}
@@ -151,14 +192,14 @@ export default async function Home() {
           <div>
             <Badge>SELECTED WORK</Badge>
             <h2 className="mt-3 font-display text-3xl md:text-4xl font-semibold tracking-tight">Work curated with care</h2>
-            <p className="mt-3 max-w-xl text-sm leading-6 text-ink/70">Projects appear here only when published from the admin. Drafts remain private until you choose to share them.</p>
+            <p className="mt-3 max-w-xl text-sm leading-6 text-ink/70">A considered selection of screen-printing and textile work — apparel graphics built around typography, texture, and detail.</p>
           </div>
-          <div className="hidden md:block font-mono text-xs tracking-widest text-ink/50">{published.length} PUBLISHED</div>
+          <div className="hidden md:block font-mono text-xs tracking-widest text-ink/50">{String(published.length).padStart(2, "0")} PROJECTS</div>
         </div>
 
         {published.length === 0 ? (
           <div className="mt-8">
-            <EmptyState title="No projects published yet" description="This space is intentionally empty until you supply your work. Use the admin panel to create projects, add galleries, set categories, and publish when ready. No fake projects are shown." hint="Admin → Projects → New Project. Add cover image + gallery, set status to Published." />
+            <EmptyState title="Selected work is being prepared" description="New case studies are on the way. In the meantime, get in touch to see relevant work or discuss a project." hint="Reach out directly — email or WhatsApp." />
           </div>
         ) : (
           <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -168,18 +209,23 @@ export default async function Home() {
                   {proj.coverImage ? (
                     <img src={proj.coverImage} alt={proj.title} className="h-full w-full object-cover group-hover:scale-[1.03] transition duration-500" />
                   ) : (
-                    <div className="h-full grid place-items-center text-ink/40 font-mono text-xs tracking-widest">NO COVER — ADD IN ADMIN</div>
+                    <div className="h-full grid place-items-center text-ink/30 font-mono text-xs tracking-widest">{proj.category.toUpperCase()}</div>
                   )}
                   <div className="absolute top-3 left-3 rounded-full bg-white/90 backdrop-blur px-3 py-1 font-mono text-[11px] tracking-widest">{proj.category}</div>
                 </div>
-                <div className="p-5">
-                  <h3 className="font-display text-lg font-semibold leading-tight">{proj.title}</h3>
-                  {proj.category.toLowerCase() !== "textile" && proj.description ? (
-                    <p className="mt-2 line-clamp-2 text-sm leading-6 text-ink/65">{proj.description}</p>
-                  ) : proj.category.toLowerCase() === "textile" ? (
-                    <p className="mt-2 font-mono text-[11px] tracking-widest text-ink/50">TEXTILE</p>
-                  ) : null}
-                  <div className="mt-4 flex items-center gap-2 font-mono text-xs text-ink/60">
+                <div className="p-5 flex flex-col min-h-[136px]">
+                  {/* Textile work is presented under the "Textile" label alone.
+                      The chip on the image already carries that label, so the body
+                      adds no title and no description — nothing is duplicated. */}
+                  {proj.category.toLowerCase() === "textile" ? null : (
+                    <>
+                      <h3 className="font-display text-lg font-semibold leading-tight">{proj.title}</h3>
+                      {proj.description ? (
+                        <p className="mt-2 line-clamp-2 text-sm leading-6 text-ink/65">{proj.description}</p>
+                      ) : null}
+                    </>
+                  )}
+                  <div className="mt-auto pt-4 flex items-center gap-2 font-mono text-xs text-ink/60">
                     <span className="h-6 w-6 rounded-full grid place-items-center bg-ivory-soft">↗</span> View project
                   </div>
                 </div>
@@ -209,7 +255,7 @@ export default async function Home() {
               {p.bio ? (
                 <p className="mt-5 whitespace-pre-wrap text-sm leading-7 text-ink/75">{p.bio}</p>
               ) : (
-                <p className="mt-5 text-sm leading-6 text-ink/60 italic">Bio will appear here once added in Admin → Profile. No invented education or awards are shown.</p>
+                <p className="mt-5 text-sm leading-6 text-ink/70">Wahab is a graphic designer and web builder working across brand identity, textile graphics, and considered digital experiences. Every project is approached with care for type, colour, and craft.</p>
               )}
               {p.resumeUrl && (
                 <a href={p.resumeUrl} target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 rounded-full border border-ink/15 bg-white px-5 py-2.5 text-sm font-medium hover:bg-ink hover:text-white transition">Download Résumé ↗</a>
@@ -267,12 +313,6 @@ export default async function Home() {
                 )}
               </div>
             )}
-            {skills.length === 0 && education.length === 0 && (
-              <div className="mt-6 rounded-2xl border border-dashed border-ink/15 bg-white/50 p-5 text-center">
-                <div className="font-mono text-xs tracking-widest text-ink/50">SKILLS & EDUCATION — HIDDEN UNTIL PROVIDED</div>
-                <div className="mt-1 text-xs text-ink/60">Add facts in Admin → Skills & Education. Nothing is invented.</div>
-              </div>
-            )}
           </div>
         </div>
       </section>
@@ -289,15 +329,24 @@ export default async function Home() {
         {services.length === 0 ? (
           <div className="mt-6 rounded-[24px] bg-white border border-ink/5 p-8 text-center">
             <div className="mx-auto max-w-xl">
-              <h3 className="font-display text-lg font-semibold">Services will be listed here</h3>
-              <p className="mt-2 text-sm leading-6 text-ink/60">Add your offerings in Admin → Services. Each service can have a title, description, and ordering. No assumptions are made about what you offer.</p>
+              <h3 className="font-display text-lg font-semibold">Let&apos;s discuss what you need</h3>
+              <p className="mt-2 text-sm leading-6 text-ink/65">
+                Brand identity, screen-printing graphics, textile design, and web builds are the usual focus.
+                Tell me about the project and I&apos;ll confirm scope, deliverables, and timing directly.
+              </p>
+              <a
+                href={`mailto:${p.email}`}
+                className="mt-5 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-2.5 text-sm font-semibold text-white hover:opacity-90 transition"
+              >
+                Email me <span aria-hidden="true">→</span>
+              </a>
             </div>
           </div>
         ) : (
           <div className="mt-8 grid md:grid-cols-3 gap-6">
             {services.map(svc=> (
               <div key={svc.id} className="rounded-[24px] bg-white border border-ink/5 p-6 shadow-soft hover:shadow-royal transition">
-                <div className="h-10 w-10 rounded-xl grid place-items-center text-white" style={{ background: accent }}>{svc.icon === "web" ? "◐" : svc.icon === "brand" ? "✦" : "⬢"}</div>
+                <div className="h-10 w-10 rounded-xl grid place-items-center" style={onAccent}>{svc.icon === "web" ? "◐" : svc.icon === "brand" ? "✦" : "⬢"}</div>
                 <h3 className="mt-4 font-display text-lg font-semibold">{svc.title}</h3>
                 <p className="mt-2 text-sm leading-6 text-ink/65">{svc.description}</p>
               </div>
@@ -344,7 +393,7 @@ export default async function Home() {
             <div className="lg:col-span-7 p-8 md:p-10 text-white">
               <div className="font-mono text-xs tracking-[0.2em] text-white/70">DIRECT CONTACT</div>
               <h2 className="mt-3 font-display text-3xl md:text-4xl font-semibold">Let&apos;s make something enduring</h2>
-              <p className="mt-3 max-w-xl text-sm leading-6 text-white/80">No forms — reach me directly via the confirmed channels below. Social links appear only when configured in the admin.</p>
+              <p className="mt-3 max-w-xl text-sm leading-6 text-white/85">No forms, no waiting on a queue — reach me directly and we&apos;ll talk through what you need.</p>
               <div className="mt-8 grid sm:grid-cols-3 gap-4">
                 <a href={`mailto:${p.email}`} className="rounded-2xl bg-white text-ink p-4 hover:shadow-soft transition">
                   <div className="font-mono text-[11px] tracking-widest text-ink/60">EMAIL</div>
@@ -354,7 +403,7 @@ export default async function Home() {
                 <a href={`https://wa.me/${p.whatsapp.replace(/[^0-9]/g,"")}?text=${encodeURIComponent("Hello Wahab, I'd like to discuss a project.")}`} target="_blank" rel="noreferrer" className="rounded-2xl bg-white text-ink p-4 hover:shadow-soft transition">
                   <div className="font-mono text-[11px] tracking-widest text-ink/60">WHATSAPP</div>
                   <div className="mt-1 text-sm font-semibold">{p.whatsapp}</div>
-                  <div className="mt-2 inline-flex rounded-full px-3 py-1 text-xs text-white" style={{ background: accent }}>Message on WhatsApp</div>
+                  <div className="mt-2 inline-flex rounded-full px-3 py-1 text-xs font-medium" style={onAccent}>Message on WhatsApp</div>
                 </a>
                 <a href={`tel:${p.mobile.replace(/\s/g,"")}`} className="rounded-2xl bg-white text-ink p-4 hover:shadow-soft transition">
                   <div className="font-mono text-[11px] tracking-widest text-ink/60">MOBILE</div>
@@ -373,9 +422,7 @@ export default async function Home() {
                     })}
                   </div>
                 </div>
-              ) : (
-                <div className="mt-6 font-mono text-xs tracking-widest text-white/60">SOCIAL LINKS HIDDEN UNTIL CONFIGURED IN ADMIN</div>
-              )}
+              ) : null}
             </div>
             <div className="lg:col-span-5 bg-white p-8 md:p-10">
               <h3 className="font-display text-xl font-semibold">Project basics</h3>
