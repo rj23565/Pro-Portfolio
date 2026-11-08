@@ -38,3 +38,6 @@ next-env.d.ts
 # portfolio data (ephemeral fallback — use DATABASE_URL in prod)
 data/store.json
 public/uploads/
+
+# allow committed portfolio assets
+!public/portfolio/
