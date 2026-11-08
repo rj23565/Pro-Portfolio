@@ -255,7 +255,7 @@ export default async function Home() {
               {p.bio ? (
                 <p className="mt-5 whitespace-pre-wrap text-sm leading-7 text-ink/75">{p.bio}</p>
               ) : (
-                <p className="mt-5 text-sm leading-6 text-ink/70">Wahab is a graphic designer and web builder working across brand identity, textile graphics, and considered digital experiences. Every project is approached with care for type, colour, and craft.</p>
+                <p className="mt-5 text-sm leading-6 text-ink/70">Graphic designer and web builder based in Faisalabad, Punjab, Pakistan — working across brand identity, screen printing, and textile graphics.</p>
               )}
               {p.resumeUrl && (
                 <a href={p.resumeUrl} target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 rounded-full border border-ink/15 bg-white px-5 py-2.5 text-sm font-medium hover:bg-ink hover:text-white transition">Download Résumé ↗</a>
